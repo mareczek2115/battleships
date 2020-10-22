@@ -1,0 +1,46 @@
+#compBoard {
+  width: 316px;
+  height: 316px;
+  border: 1px solid black;
+  margin-left: 30px;
+}
+.compSquare {
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  border-collapse: collapse;
+  float: left;
+}
+body {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 1000px;
+}
+#userBoard {
+  width: 316px;
+  height: 316px;
+  margin-left: 150px;
+  border: 1px solid black;
+}
+.ship {
+  height: 32px;
+  margin-bottom: 12px;
+}
+.boardSquare {
+  width: 30px;
+  height: 30px;
+  border-collapse: collapse;
+  border: 1px solid black;
+  float: left;
+}
+.shipSquare {
+  width: 30px;
+  height: 30px;
+  border-collapse: collapse;
+  border: 1px solid #222222;
+  float: left;
+}
+.btn {
+  margin-left: 450px;
+}

@@ -37,6 +37,8 @@ let userDirection = 'horizontal';
 let chosenShip = 4;
 let chosenShip2 = '1';
 let noShips = false;
+let horizontalBruh = false;
+let verticalBruh = false;
 let userPositions = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -276,172 +278,366 @@ const setUserBoard = function () {
     } else row = Math.ceil(i / 10);
     let column = i - Math.floor(i / 10) * 10 + 1;
     square.onmouseover = function () {
+      horizontalBruh = false;
+      verticalBruh = false;
+      let hoveredSquare = document.getElementById(`${parseInt(this.id)}`);
       if (chosenShip != undefined) {
         if (userDirection === 'horizontal') {
-          switch (chosenShip) {
-            case 4:
-              if (fourSquaresHorizontal(row, column, userPositions)) {
+          if (parseInt(hoveredSquare.id) % 10 === 8 && chosenShip === 4) {
+            horizontalBruh = true;
+            if (fourSquaresHorizontal(row, column - 1, userPositions)) {
+              for (var i = -1; i < 3; i++) {
                 document.getElementById(
-                  `${parseInt(this.id)}`,
+                  `${parseInt(this.id) + i}`
                 ).style.backgroundColor = 'green';
+              }
+            } else {
+              for (var i = -1; i < 3; i++) {
                 document.getElementById(
-                  `${parseInt(this.id) + 1}`,
-                ).style.backgroundColor = 'green';
-                document.getElementById(
-                  `${parseInt(this.id) + 2}`,
-                ).style.backgroundColor = 'green';
-                document.getElementById(
-                  `${parseInt(this.id) + 3}`,
-                ).style.backgroundColor = 'green';
-              } else {
-                document.getElementById(
-                  `${parseInt(this.id)}`,
-                ).style.backgroundColor = 'red';
-                document.getElementById(
-                  `${parseInt(this.id) + 1}`,
-                ).style.backgroundColor = 'red';
-                document.getElementById(
-                  `${parseInt(this.id) + 2}`,
-                ).style.backgroundColor = 'red';
-                document.getElementById(
-                  `${parseInt(this.id) + 3}`,
+                  `${parseInt(this.id) + i}`
                 ).style.backgroundColor = 'red';
               }
-              break;
-            case 3:
-              if (threeSquaresHorizontal(row, column, userPositions)) {
+            }
+          } else if (
+            parseInt(hoveredSquare.id) % 10 === 9 &&
+            chosenShip === 4
+          ) {
+            horizontalBruh = true;
+            if (fourSquaresHorizontal(row, column - 2, userPositions)) {
+              for (var i = -2; i < 2; i++) {
                 document.getElementById(
-                  `${parseInt(this.id)}`,
+                  `${parseInt(this.id) + i}`
                 ).style.backgroundColor = 'green';
+              }
+            } else {
+              for (var i = -2; i < 2; i++) {
                 document.getElementById(
-                  `${parseInt(this.id) + 1}`,
-                ).style.backgroundColor = 'green';
-                document.getElementById(
-                  `${parseInt(this.id) + 2}`,
-                ).style.backgroundColor = 'green';
-              } else {
-                document.getElementById(
-                  `${parseInt(this.id)}`,
-                ).style.backgroundColor = 'red';
-                document.getElementById(
-                  `${parseInt(this.id) + 1}`,
-                ).style.backgroundColor = 'red';
-                document.getElementById(
-                  `${parseInt(this.id) + 2}`,
+                  `${parseInt(this.id) + i}`
                 ).style.backgroundColor = 'red';
               }
-              break;
-            case 2:
-              if (twoSquaresHorizontal(row, column, userPositions)) {
+            }
+          } else if (
+            parseInt(hoveredSquare.id) % 10 === 9 &&
+            chosenShip === 3
+          ) {
+            horizontalBruh = true;
+            if (threeSquaresHorizontal(row, column - 1, userPositions)) {
+              for (var i = -1; i < 2; i++) {
                 document.getElementById(
-                  `${parseInt(this.id)}`,
+                  `${parseInt(this.id) + i}`
                 ).style.backgroundColor = 'green';
+              }
+            } else {
+              for (var i = -1; i < 2; i++) {
                 document.getElementById(
-                  `${parseInt(this.id) + 1}`,
-                ).style.backgroundColor = 'green';
-              } else {
-                document.getElementById(
-                  `${parseInt(this.id)}`,
-                ).style.backgroundColor = 'red';
-                document.getElementById(
-                  `${parseInt(this.id) + 1}`,
+                  `${parseInt(this.id) + i}`
                 ).style.backgroundColor = 'red';
               }
-              break;
-            case 1:
-              if (oneSquareHorizontal(row, column, userPositions)) {
+            }
+          } else if (
+            parseInt(hoveredSquare.id) % 10 === 0 &&
+            chosenShip === 4
+          ) {
+            horizontalBruh = true;
+            if (fourSquaresHorizontal(row, column - 3, userPositions)) {
+              for (var i = -3; i < 1; i++) {
                 document.getElementById(
-                  `${parseInt(this.id)}`,
+                  `${parseInt(this.id) + i}`
                 ).style.backgroundColor = 'green';
-              } else {
+              }
+            } else {
+              for (var i = -3; i < 1; i++) {
                 document.getElementById(
-                  `${parseInt(this.id)}`,
+                  `${parseInt(this.id) + i}`
                 ).style.backgroundColor = 'red';
               }
-              break;
+            }
+          } else if (
+            parseInt(hoveredSquare.id) % 10 === 0 &&
+            chosenShip === 3
+          ) {
+            horizontalBruh = true;
+            if (threeSquaresHorizontal(row, column - 2, userPositions)) {
+              for (var i = -2; i < 1; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i}`
+                ).style.backgroundColor = 'green';
+              }
+            } else {
+              for (var i = -2; i < 1; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i}`
+                ).style.backgroundColor = 'red';
+              }
+            }
+          } else if (
+            parseInt(hoveredSquare.id) % 10 === 0 &&
+            chosenShip === 2
+          ) {
+            horizontalBruh = true;
+            if (twoSquaresHorizontal(row, column - 1, userPositions)) {
+              document.getElementById(
+                `${parseInt(this.id) - 1}`
+              ).style.backgroundColor = 'green';
+              document.getElementById(
+                `${parseInt(this.id)}`
+              ).style.backgroundColor = 'green';
+            } else {
+              document.getElementById(
+                `${parseInt(this.id) - 1}`
+              ).style.backgroundColor = 'red';
+              document.getElementById(
+                `${parseInt(this.id)}`
+              ).style.backgroundColor = 'red';
+            }
+          } else {
+            horizontalBruh = false;
+            switch (chosenShip) {
+              case 4:
+                if (fourSquaresHorizontal(row, column, userPositions)) {
+                  for (var i = 0; i < 4; i++) {
+                    document.getElementById(
+                      `${parseInt(this.id) + i}`
+                    ).style.backgroundColor = 'green';
+                  }
+                } else {
+                  for (var i = 0; i < 4; i++) {
+                    document.getElementById(
+                      `${parseInt(this.id) + i}`
+                    ).style.backgroundColor = 'red';
+                  }
+                }
+                break;
+              case 3:
+                if (threeSquaresHorizontal(row, column, userPositions)) {
+                  for (var i = 0; i < 3; i++) {
+                    document.getElementById(
+                      `${parseInt(this.id) + i}`
+                    ).style.backgroundColor = 'green';
+                  }
+                } else {
+                  for (var i = 0; i < 3; i++) {
+                    document.getElementById(
+                      `${parseInt(this.id) + i}`
+                    ).style.backgroundColor = 'red';
+                  }
+                }
+                break;
+              case 2:
+                if (twoSquaresHorizontal(row, column, userPositions)) {
+                  document.getElementById(
+                    `${parseInt(this.id)}`
+                  ).style.backgroundColor = 'green';
+                  document.getElementById(
+                    `${parseInt(this.id) + 1}`
+                  ).style.backgroundColor = 'green';
+                } else {
+                  document.getElementById(
+                    `${parseInt(this.id)}`
+                  ).style.backgroundColor = 'red';
+                  document.getElementById(
+                    `${parseInt(this.id) + 1}`
+                  ).style.backgroundColor = 'red';
+                }
+                break;
+              case 1:
+                if (oneSquareHorizontal(row, column, userPositions)) {
+                  document.getElementById(
+                    `${parseInt(this.id)}`
+                  ).style.backgroundColor = 'green';
+                } else {
+                  document.getElementById(
+                    `${parseInt(this.id)}`
+                  ).style.backgroundColor = 'red';
+                }
+                break;
+            }
           }
-        } else {
-          switch (chosenShip) {
-            case 4:
-              if (fourSquaresVertical(row, column, userPositions)) {
+        } else if (userDirection === 'vertical') {
+          if (
+            ((hoveredSquare.id.substr(0, 1) === '7' &&
+              hoveredSquare.id.length !== 1) ||
+              parseInt(hoveredSquare.id) === 80) &&
+            chosenShip === 4
+          ) {
+            verticalBruh = true;
+            if (fourSquaresVertical(row - 1, column, userPositions)) {
+              for (var i = -1; i < 3; i++) {
                 document.getElementById(
-                  `${parseInt(this.id)}`,
+                  `${parseInt(this.id) + i * 10}`
                 ).style.backgroundColor = 'green';
+              }
+            } else {
+              for (var i = -1; i < 3; i++) {
                 document.getElementById(
-                  `${parseInt(this.id) + 10}`,
-                ).style.backgroundColor = 'green';
-                document.getElementById(
-                  `${parseInt(this.id) + 20}`,
-                ).style.backgroundColor = 'green';
-                document.getElementById(
-                  `${parseInt(this.id) + 30}`,
-                ).style.backgroundColor = 'green';
-              } else {
-                document.getElementById(
-                  `${parseInt(this.id)}`,
-                ).style.backgroundColor = 'red';
-                document.getElementById(
-                  `${parseInt(this.id) + 10}`,
-                ).style.backgroundColor = 'red';
-                document.getElementById(
-                  `${parseInt(this.id) + 20}`,
-                ).style.backgroundColor = 'red';
-                document.getElementById(
-                  `${parseInt(this.id) + 30}`,
+                  `${parseInt(this.id) + i * 10}`
                 ).style.backgroundColor = 'red';
               }
-              break;
-            case 3:
-              if (threeSquaresVertical(row, column, userPositions)) {
+            }
+          } else if (
+            ((hoveredSquare.id.substr(0, 1) === '8' &&
+              hoveredSquare.id.length !== 1) ||
+              parseInt(hoveredSquare.id) === 90) &&
+            chosenShip === 4
+          ) {
+            verticalBruh = true;
+            if (fourSquaresVertical(row - 2, column, userPositions)) {
+              for (var i = -2; i < 2; i++) {
                 document.getElementById(
-                  `${parseInt(this.id)}`,
+                  `${parseInt(this.id) + i * 10}`
                 ).style.backgroundColor = 'green';
+              }
+            } else {
+              for (var i = -2; i < 2; i++) {
                 document.getElementById(
-                  `${parseInt(this.id) + 10}`,
-                ).style.backgroundColor = 'green';
-                document.getElementById(
-                  `${parseInt(this.id) + 20}`,
-                ).style.backgroundColor = 'green';
-              } else {
-                document.getElementById(
-                  `${parseInt(this.id)}`,
-                ).style.backgroundColor = 'red';
-                document.getElementById(
-                  `${parseInt(this.id) + 10}`,
-                ).style.backgroundColor = 'red';
-                document.getElementById(
-                  `${parseInt(this.id) + 20}`,
+                  `${parseInt(this.id) + i * 10}`
                 ).style.backgroundColor = 'red';
               }
-              break;
-            case 2:
-              if (twoSquaresVertical(row, column, userPositions)) {
+            }
+          } else if (
+            ((hoveredSquare.id.substr(0, 1) === '8' &&
+              hoveredSquare.id.length !== 1) ||
+              parseInt(hoveredSquare.id) === 90) &&
+            chosenShip === 3
+          ) {
+            verticalBruh = true;
+            if (threeSquaresVertical(row - 1, column, userPositions)) {
+              for (var i = -1; i < 2; i++) {
                 document.getElementById(
-                  `${parseInt(this.id)}`,
+                  `${parseInt(this.id) + i * 10}`
                 ).style.backgroundColor = 'green';
+              }
+            } else {
+              for (var i = -1; i < 2; i++) {
                 document.getElementById(
-                  `${parseInt(this.id) + 10}`,
-                ).style.backgroundColor = 'green';
-              } else {
-                document.getElementById(
-                  `${parseInt(this.id)}`,
-                ).style.backgroundColor = 'red';
-                document.getElementById(
-                  `${parseInt(this.id) + 10}`,
+                  `${parseInt(this.id) + i * 10}`
                 ).style.backgroundColor = 'red';
               }
-              break;
-            case 1:
-              if (oneSquareVertical(row, column, userPositions)) {
+            }
+          } else if (
+            ((hoveredSquare.id.substr(0, 1) === '9' &&
+              hoveredSquare.id.length !== 1) ||
+              parseInt(hoveredSquare.id) === 100) &&
+            chosenShip === 4
+          ) {
+            verticalBruh = true;
+            if (fourSquaresVertical(row - 3, column, userPositions)) {
+              for (var i = -3; i < 1; i++) {
                 document.getElementById(
-                  `${parseInt(this.id)}`,
+                  `${parseInt(this.id) + i * 10}`
                 ).style.backgroundColor = 'green';
-              } else {
+              }
+            } else {
+              for (var i = -3; i < 1; i++) {
                 document.getElementById(
-                  `${parseInt(this.id)}`,
+                  `${parseInt(this.id) + i * 10}`
                 ).style.backgroundColor = 'red';
               }
-              break;
+            }
+          } else if (
+            ((hoveredSquare.id.substr(0, 1) === '9' &&
+              hoveredSquare.id.length !== 1) ||
+              parseInt(hoveredSquare.id) === 100) &&
+            chosenShip === 3
+          ) {
+            verticalBruh = true;
+            if (threeSquaresVertical(row - 2, column, userPositions)) {
+              for (var i = -2; i < 1; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i * 10}`
+                ).style.backgroundColor = 'green';
+              }
+            } else {
+              for (var i = -2; i < 1; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i * 10}`
+                ).style.backgroundColor = 'red';
+              }
+            }
+          } else if (
+            ((hoveredSquare.id.substr(0, 1) === '9' &&
+              hoveredSquare.id.length !== 1) ||
+              parseInt(hoveredSquare.id) === 100) &&
+            chosenShip === 2
+          ) {
+            verticalBruh = true;
+            if (twoSquaresVertical(row - 1, column, userPositions)) {
+              document.getElementById(
+                `${parseInt(this.id) - 10}`
+              ).style.backgroundColor = 'green';
+              document.getElementById(
+                `${parseInt(this.id)}`
+              ).style.backgroundColor = 'green';
+            } else {
+              document.getElementById(
+                `${parseInt(this.id) - 10}`
+              ).style.backgroundColor = 'red';
+              document.getElementById(
+                `${parseInt(this.id)}`
+              ).style.backgroundColor = 'red';
+            }
+          } else {
+            verticalBruh = false;
+            switch (chosenShip) {
+              case 4:
+                if (fourSquaresVertical(row, column, userPositions)) {
+                  for (var i = 0; i < 4; i++) {
+                    document.getElementById(
+                      `${parseInt(this.id) + i * 10}`
+                    ).style.backgroundColor = 'green';
+                  }
+                } else {
+                  for (var i = 0; i < 4; i++) {
+                    document.getElementById(
+                      `${parseInt(this.id) + i * 10}`
+                    ).style.backgroundColor = 'red';
+                  }
+                }
+                break;
+              case 3:
+                if (threeSquaresVertical(row, column, userPositions)) {
+                  for (var i = 0; i < 3; i++) {
+                    document.getElementById(
+                      `${parseInt(this.id) + i * 10}`
+                    ).style.backgroundColor = 'green';
+                  }
+                } else {
+                  for (var i = 0; i < 3; i++) {
+                    document.getElementById(
+                      `${parseInt(this.id) + i * 10}`
+                    ).style.backgroundColor = 'red';
+                  }
+                }
+                break;
+              case 2:
+                if (twoSquaresVertical(row, column, userPositions)) {
+                  document.getElementById(
+                    `${parseInt(this.id)}`
+                  ).style.backgroundColor = 'green';
+                  document.getElementById(
+                    `${parseInt(this.id) + 10}`
+                  ).style.backgroundColor = 'green';
+                } else {
+                  document.getElementById(
+                    `${parseInt(this.id)}`
+                  ).style.backgroundColor = 'red';
+                  document.getElementById(
+                    `${parseInt(this.id) + 10}`
+                  ).style.backgroundColor = 'red';
+                }
+                break;
+              case 1:
+                if (oneSquareVertical(row, column, userPositions)) {
+                  document.getElementById(
+                    `${parseInt(this.id)}`
+                  ).style.backgroundColor = 'green';
+                } else {
+                  document.getElementById(
+                    `${parseInt(this.id)}`
+                  ).style.backgroundColor = 'red';
+                }
+                break;
+            }
           }
         }
       }
@@ -456,216 +652,600 @@ const setUserBoard = function () {
       }
     };
     square.oncontextmenu = function (e) {
+      let hoveredSquare = document.getElementById(`${this.id}`);
       e.preventDefault();
       switch (userDirection) {
         case 'horizontal':
           for (var i = 1; i < chosenShip; i++) {
-            document.getElementById(
-              `${parseInt(this.id) + i}`,
-            ).style.backgroundColor = 'white';
+            if (horizontalBruh) {
+              if (
+                document
+                  .getElementById(`${parseInt(this.id) - i}`)
+                  .className.substr(12, 8) !== 'occupied'
+              ) {
+                document.getElementById(
+                  `${parseInt(this.id) - i}`
+                ).style.backgroundColor = 'white';
+              } else {
+                document.getElementById(
+                  `${parseInt(this.id) - i}`
+                ).style.backgroundColor = 'black';
+              }
+              if (
+                document.getElementById(`${parseInt(this.id) + i}`) !== null &&
+                document
+                  .getElementById(`${parseInt(this.id) + i}`)
+                  .className.substr(12, 8) !== 'occupied'
+              ) {
+                document.getElementById(
+                  `${parseInt(this.id) + i}`
+                ).style.backgroundColor = 'white';
+              } else if (
+                document.getElementById(`${parseInt(this.id) + i}`) !== null
+              ) {
+                document.getElementById(
+                  `${parseInt(this.id) + i}`
+                ).style.backgroundColor = 'black';
+              }
+            } else {
+              if (
+                document
+                  .getElementById(`${parseInt(this.id) + i}`)
+                  .className.substr(12, 8) !== 'occupied'
+              ) {
+                document.getElementById(
+                  `${parseInt(this.id) + i}`
+                ).style.backgroundColor = 'white';
+              } else {
+                document.getElementById(
+                  `${parseInt(this.id) + i}`
+                ).style.backgroundColor = 'black';
+              }
+            }
           }
           break;
         case 'vertical':
           for (var i = 1; i < chosenShip; i++) {
-            if (
-              document.getElementById(`${parseInt(this.id) + i * 10}`) != null
-            )
-              document.getElementById(
-                `${parseInt(this.id) + i * 10}`,
-              ).style.backgroundColor = 'white';
+            if (verticalBruh) {
+              if (
+                document.getElementById(`${parseInt(this.id) - i * 10}`) != null
+              ) {
+                if (
+                  document
+                    .getElementById(`${parseInt(this.id) - i * 10}`)
+                    .className.substr(12, 8) !== 'occupied'
+                ) {
+                  document.getElementById(
+                    `${parseInt(this.id) - i * 10}`
+                  ).style.backgroundColor = 'white';
+                } else {
+                  document.getElementById(
+                    `${parseInt(this.id) - i * 10}`
+                  ).style.backgroundColor = 'black';
+                }
+              }
+              if (
+                document.getElementById(`${parseInt(this.id) + i * 10}`) != null
+              ) {
+                if (
+                  document
+                    .getElementById(`${parseInt(this.id) + i * 10}`)
+                    .className.substr(12, 8) !== 'occupied'
+                ) {
+                  document.getElementById(
+                    `${parseInt(this.id) + i * 10}`
+                  ).style.backgroundColor = 'white';
+                } else {
+                  document.getElementById(
+                    `${parseInt(this.id) + i * 10}`
+                  ).style.backgroundColor = 'black';
+                }
+              }
+            } else {
+              if (
+                document.getElementById(`${parseInt(this.id) + i * 10}`) != null
+              ) {
+                if (
+                  document
+                    .getElementById(`${parseInt(this.id) + i * 10}`)
+                    .className.substr(12, 8) !== 'occupied'
+                ) {
+                  document.getElementById(
+                    `${parseInt(this.id) + i * 10}`
+                  ).style.backgroundColor = 'white';
+                } else {
+                  document.getElementById(
+                    `${parseInt(this.id) + i * 10}`
+                  ).style.backgroundColor = 'black';
+                }
+              }
+            }
           }
           break;
       }
       if (userDirection === 'vertical') userDirection = 'horizontal';
       else userDirection = 'vertical';
       if (userDirection === 'horizontal') {
-        switch (chosenShip) {
-          case 4:
-            if (fourSquaresHorizontal(row, column, userPositions)) {
+        if (
+          (parseInt(hoveredSquare.id) % 10 === 8 && chosenShip === 4) ||
+          (parseInt(hoveredSquare.id) % 10 === 9 && chosenShip === 4) ||
+          (parseInt(hoveredSquare.id) % 10 === 9 && chosenShip === 3) ||
+          (parseInt(hoveredSquare.id) % 10 === 0 && chosenShip === 4) ||
+          (parseInt(hoveredSquare.id) % 10 === 0 && chosenShip === 3) ||
+          (parseInt(hoveredSquare.id) % 10 === 0 && chosenShip === 2)
+        )
+          horizontalBruh = true;
+        if (horizontalBruh) {
+          if (parseInt(hoveredSquare.id) % 10 === 8 && chosenShip === 4) {
+            horizontalBruh = true;
+            if (fourSquaresHorizontal(row, column - 1, userPositions)) {
+              for (var i = -1; i < 3; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i}`
+                ).style.backgroundColor = 'green';
+              }
+            } else {
+              for (var i = -1; i < 3; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i}`
+                ).style.backgroundColor = 'red';
+              }
+            }
+          } else if (
+            parseInt(hoveredSquare.id) % 10 === 9 &&
+            chosenShip === 4
+          ) {
+            horizontalBruh = true;
+            if (fourSquaresHorizontal(row, column - 2, userPositions)) {
+              for (var i = -2; i < 2; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i}`
+                ).style.backgroundColor = 'green';
+              }
+            } else {
+              for (var i = -2; i < 2; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i}`
+                ).style.backgroundColor = 'red';
+              }
+            }
+          } else if (
+            parseInt(hoveredSquare.id) % 10 === 9 &&
+            chosenShip === 3
+          ) {
+            horizontalBruh = true;
+            if (threeSquaresHorizontal(row, column - 1, userPositions)) {
+              for (var i = -1; i < 2; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i}`
+                ).style.backgroundColor = 'green';
+              }
+            } else {
+              for (var i = -1; i < 2; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i}`
+                ).style.backgroundColor = 'red';
+              }
+            }
+          } else if (
+            parseInt(hoveredSquare.id) % 10 === 0 &&
+            chosenShip === 4
+          ) {
+            horizontalBruh = true;
+            if (fourSquaresHorizontal(row, column - 3, userPositions)) {
+              for (var i = -3; i < 1; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i}`
+                ).style.backgroundColor = 'green';
+              }
+            } else {
+              for (var i = -3; i < 1; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i}`
+                ).style.backgroundColor = 'red';
+              }
+            }
+          } else if (
+            parseInt(hoveredSquare.id) % 10 === 0 &&
+            chosenShip === 3
+          ) {
+            horizontalBruh = true;
+            if (threeSquaresHorizontal(row, column - 2, userPositions)) {
+              for (var i = -2; i < 1; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i}`
+                ).style.backgroundColor = 'green';
+              }
+            } else {
+              for (var i = -2; i < 1; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i}`
+                ).style.backgroundColor = 'red';
+              }
+            }
+          } else if (
+            parseInt(hoveredSquare.id) % 10 === 0 &&
+            chosenShip === 2
+          ) {
+            horizontalBruh = true;
+            if (twoSquaresHorizontal(row, column - 1, userPositions)) {
               document.getElementById(
-                `${parseInt(this.id)}`,
+                `${parseInt(this.id) - 1}`
               ).style.backgroundColor = 'green';
               document.getElementById(
-                `${parseInt(this.id) + 1}`,
-              ).style.backgroundColor = 'green';
-              document.getElementById(
-                `${parseInt(this.id) + 2}`,
-              ).style.backgroundColor = 'green';
-              document.getElementById(
-                `${parseInt(this.id) + 3}`,
+                `${parseInt(this.id)}`
               ).style.backgroundColor = 'green';
             } else {
               document.getElementById(
-                `${parseInt(this.id)}`,
+                `${parseInt(this.id) - 1}`
               ).style.backgroundColor = 'red';
               document.getElementById(
-                `${parseInt(this.id) + 1}`,
-              ).style.backgroundColor = 'red';
-              document.getElementById(
-                `${parseInt(this.id) + 2}`,
-              ).style.backgroundColor = 'red';
-              document.getElementById(
-                `${parseInt(this.id) + 3}`,
+                `${parseInt(this.id)}`
               ).style.backgroundColor = 'red';
             }
-            break;
-          case 3:
-            if (threeSquaresHorizontal(row, column, userPositions)) {
-              document.getElementById(
-                `${parseInt(this.id)}`,
-              ).style.backgroundColor = 'green';
-              document.getElementById(
-                `${parseInt(this.id) + 1}`,
-              ).style.backgroundColor = 'green';
-              document.getElementById(
-                `${parseInt(this.id) + 2}`,
-              ).style.backgroundColor = 'green';
-            } else {
-              document.getElementById(
-                `${parseInt(this.id)}`,
-              ).style.backgroundColor = 'red';
-              document.getElementById(
-                `${parseInt(this.id) + 1}`,
-              ).style.backgroundColor = 'red';
-              document.getElementById(
-                `${parseInt(this.id) + 2}`,
-              ).style.backgroundColor = 'red';
+          } else {
+            horizontalBruh = false;
+            switch (chosenShip) {
+              case 4:
+                if (fourSquaresHorizontal(row, column, userPositions)) {
+                  for (var i = 0; i < 4; i++) {
+                    document.getElementById(
+                      `${parseInt(this.id) + i}`
+                    ).style.backgroundColor = 'green';
+                  }
+                } else {
+                  for (var i = 0; i < 4; i++) {
+                    document.getElementById(
+                      `${parseInt(this.id) + i}`
+                    ).style.backgroundColor = 'red';
+                  }
+                }
+                break;
+              case 3:
+                if (threeSquaresHorizontal(row, column, userPositions)) {
+                  for (var i = 0; i < 3; i++) {
+                    document.getElementById(
+                      `${parseInt(this.id) + i}`
+                    ).style.backgroundColor = 'green';
+                  }
+                } else {
+                  for (var i = 0; i < 3; i++) {
+                    document.getElementById(
+                      `${parseInt(this.id) + i}`
+                    ).style.backgroundColor = 'red';
+                  }
+                }
+                break;
+              case 2:
+                if (twoSquaresHorizontal(row, column, userPositions)) {
+                  document.getElementById(
+                    `${parseInt(this.id)}`
+                  ).style.backgroundColor = 'green';
+                  document.getElementById(
+                    `${parseInt(this.id) + 1}`
+                  ).style.backgroundColor = 'green';
+                } else {
+                  document.getElementById(
+                    `${parseInt(this.id)}`
+                  ).style.backgroundColor = 'red';
+                  document.getElementById(
+                    `${parseInt(this.id) + 1}`
+                  ).style.backgroundColor = 'red';
+                }
+                break;
+              case 1:
+                if (oneSquareHorizontal(row, column, userPositions)) {
+                  document.getElementById(
+                    `${parseInt(this.id)}`
+                  ).style.backgroundColor = 'green';
+                } else {
+                  document.getElementById(
+                    `${parseInt(this.id)}`
+                  ).style.backgroundColor = 'red';
+                }
+                break;
             }
-
-            break;
-          case 2:
-            if (twoSquaresHorizontal(row, column, userPositions)) {
-              document.getElementById(
-                `${parseInt(this.id)}`,
-              ).style.backgroundColor = 'green';
-              document.getElementById(
-                `${parseInt(this.id) + 1}`,
-              ).style.backgroundColor = 'green';
-            } else {
-              document.getElementById(
-                `${parseInt(this.id)}`,
-              ).style.backgroundColor = 'red';
-              document.getElementById(
-                `${parseInt(this.id) + 1}`,
-              ).style.backgroundColor = 'red';
-            }
-            break;
-          case 1:
-            if (oneSquareHorizontal(row, column, userPositions)) {
-              document.getElementById(
-                `${parseInt(this.id)}`,
-              ).style.backgroundColor = 'green';
-            } else {
-              document.getElementById(
-                `${parseInt(this.id)}`,
-              ).style.backgroundColor = 'red';
-            }
-            break;
+          }
+        } else {
+          switch (chosenShip) {
+            case 4:
+              if (fourSquaresHorizontal(row, column, userPositions)) {
+                for (var i = 0; i < 4; i++) {
+                  document.getElementById(
+                    `${parseInt(this.id) + i}`
+                  ).style.backgroundColor = 'green';
+                }
+              } else {
+                for (var i = 0; i < 4; i++) {
+                  document.getElementById(
+                    `${parseInt(this.id) + i}`
+                  ).style.backgroundColor = 'red';
+                }
+              }
+              break;
+            case 3:
+              if (threeSquaresHorizontal(row, column, userPositions)) {
+                for (var i = 0; i < 3; i++) {
+                  document.getElementById(
+                    `${parseInt(this.id) + i}`
+                  ).style.backgroundColor = 'green';
+                }
+              } else {
+                for (var i = 0; i < 3; i++) {
+                  document.getElementById(
+                    `${parseInt(this.id) + i}`
+                  ).style.backgroundColor = 'red';
+                }
+              }
+              break;
+            case 2:
+              if (twoSquaresHorizontal(row, column, userPositions)) {
+                document.getElementById(
+                  `${parseInt(this.id)}`
+                ).style.backgroundColor = 'green';
+                document.getElementById(
+                  `${parseInt(this.id) + 1}`
+                ).style.backgroundColor = 'green';
+              } else {
+                document.getElementById(
+                  `${parseInt(this.id)}`
+                ).style.backgroundColor = 'red';
+                document.getElementById(
+                  `${parseInt(this.id) + 1}`
+                ).style.backgroundColor = 'red';
+              }
+              break;
+            case 1:
+              if (oneSquareHorizontal(row, column, userPositions)) {
+                document.getElementById(
+                  `${parseInt(this.id)}`
+                ).style.backgroundColor = 'green';
+              } else {
+                document.getElementById(
+                  `${parseInt(this.id)}`
+                ).style.backgroundColor = 'red';
+              }
+              break;
+          }
         }
       } else if (userDirection === 'vertical') {
-        switch (chosenShip) {
-          case 4:
-            if (fourSquaresVertical(row, column, userPositions)) {
+        if (
+          (((hoveredSquare.id.substr(0, 1) === '7' &&
+            hoveredSquare.id.length !== 1) ||
+            parseInt(hoveredSquare.id) === 80) &&
+            chosenShip === 4) ||
+          (((hoveredSquare.id.substr(0, 1) === '8' &&
+            hoveredSquare.id.length !== 1) ||
+            parseInt(hoveredSquare.id) === 90) &&
+            chosenShip === 4) ||
+          (((hoveredSquare.id.substr(0, 1) === '8' &&
+            hoveredSquare.id.length !== 1) ||
+            parseInt(hoveredSquare.id) === 90) &&
+            chosenShip === 3) ||
+          (((hoveredSquare.id.substr(0, 1) === '9' &&
+            hoveredSquare.id.length !== 1) ||
+            parseInt(hoveredSquare.id) === 100) &&
+            chosenShip === 4) ||
+          (((hoveredSquare.id.substr(0, 1) === '9' &&
+            hoveredSquare.id.length !== 1) ||
+            parseInt(hoveredSquare.id) === 100) &&
+            chosenShip === 3) ||
+          (((hoveredSquare.id.substr(0, 1) === '9' &&
+            hoveredSquare.id.length !== 1) ||
+            parseInt(hoveredSquare.id) === 100) &&
+            chosenShip === 2)
+        )
+          verticalBruh = true;
+        if (verticalBruh) {
+          if (
+            ((hoveredSquare.id.substr(0, 1) === '7' &&
+              hoveredSquare.id.length !== 1) ||
+              parseInt(hoveredSquare.id) === 80) &&
+            chosenShip === 4
+          ) {
+            verticalBruh = true;
+            if (fourSquaresVertical(row - 1, column, userPositions)) {
+              for (var i = -1; i < 3; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i * 10}`
+                ).style.backgroundColor = 'green';
+              }
+            } else {
+              for (var i = -1; i < 3; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i * 10}`
+                ).style.backgroundColor = 'red';
+              }
+            }
+          } else if (
+            ((hoveredSquare.id.substr(0, 1) === '8' &&
+              hoveredSquare.id.length !== 1) ||
+              parseInt(hoveredSquare.id) === 90) &&
+            chosenShip === 4
+          ) {
+            verticalBruh = true;
+            if (fourSquaresVertical(row - 2, column, userPositions)) {
+              for (var i = -2; i < 2; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i * 10}`
+                ).style.backgroundColor = 'green';
+              }
+            } else {
+              for (var i = -2; i < 2; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i * 10}`
+                ).style.backgroundColor = 'red';
+              }
+            }
+          } else if (
+            ((hoveredSquare.id.substr(0, 1) === '8' &&
+              hoveredSquare.id.length !== 1) ||
+              parseInt(hoveredSquare.id) === 90) &&
+            chosenShip === 3
+          ) {
+            verticalBruh = true;
+            if (threeSquaresVertical(row - 1, column, userPositions)) {
+              for (var i = -1; i < 2; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i * 10}`
+                ).style.backgroundColor = 'green';
+              }
+            } else {
+              for (var i = -1; i < 2; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i * 10}`
+                ).style.backgroundColor = 'red';
+              }
+            }
+          } else if (
+            ((hoveredSquare.id.substr(0, 1) === '9' &&
+              hoveredSquare.id.length !== 1) ||
+              parseInt(hoveredSquare.id) === 100) &&
+            chosenShip === 4
+          ) {
+            verticalBruh = true;
+            if (fourSquaresVertical(row - 3, column, userPositions)) {
+              for (var i = -3; i < 1; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i * 10}`
+                ).style.backgroundColor = 'green';
+              }
+            } else {
+              for (var i = -3; i < 1; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i * 10}`
+                ).style.backgroundColor = 'red';
+              }
+            }
+          } else if (
+            ((hoveredSquare.id.substr(0, 1) === '9' &&
+              hoveredSquare.id.length !== 1) ||
+              parseInt(hoveredSquare.id) === 100) &&
+            chosenShip === 3
+          ) {
+            verticalBruh = true;
+            if (threeSquaresVertical(row - 2, column, userPositions)) {
+              for (var i = -2; i < 1; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i * 10}`
+                ).style.backgroundColor = 'green';
+              }
+            } else {
+              for (var i = -2; i < 1; i++) {
+                document.getElementById(
+                  `${parseInt(this.id) + i * 10}`
+                ).style.backgroundColor = 'red';
+              }
+            }
+          } else if (
+            ((hoveredSquare.id.substr(0, 1) === '9' &&
+              hoveredSquare.id.length !== 1) ||
+              parseInt(hoveredSquare.id) === 100) &&
+            chosenShip === 2
+          ) {
+            verticalBruh = true;
+            if (twoSquaresVertical(row - 1, column, userPositions)) {
               document.getElementById(
-                `${parseInt(this.id)}`,
+                `${parseInt(this.id) - 10}`
               ).style.backgroundColor = 'green';
               document.getElementById(
-                `${parseInt(this.id) + 10}`,
-              ).style.backgroundColor = 'green';
-              document.getElementById(
-                `${parseInt(this.id) + 20}`,
-              ).style.backgroundColor = 'green';
-              document.getElementById(
-                `${parseInt(this.id) + 30}`,
+                `${parseInt(this.id)}`
               ).style.backgroundColor = 'green';
             } else {
               document.getElementById(
-                `${parseInt(this.id)}`,
+                `${parseInt(this.id) - 10}`
               ).style.backgroundColor = 'red';
               document.getElementById(
-                `${parseInt(this.id) + 10}`,
-              ).style.backgroundColor = 'red';
-              document.getElementById(
-                `${parseInt(this.id) + 20}`,
-              ).style.backgroundColor = 'red';
-              document.getElementById(
-                `${parseInt(this.id) + 30}`,
+                `${parseInt(this.id)}`
               ).style.backgroundColor = 'red';
             }
-            break;
-          case 3:
-            if (threeSquaresVertical(row, column, userPositions)) {
-              document.getElementById(
-                `${parseInt(this.id)}`,
-              ).style.backgroundColor = 'green';
-              document.getElementById(
-                `${parseInt(this.id) + 10}`,
-              ).style.backgroundColor = 'green';
-              document.getElementById(
-                `${parseInt(this.id) + 20}`,
-              ).style.backgroundColor = 'green';
-            } else {
-              document.getElementById(
-                `${parseInt(this.id)}`,
-              ).style.backgroundColor = 'red';
-              document.getElementById(
-                `${parseInt(this.id) + 10}`,
-              ).style.backgroundColor = 'red';
-              document.getElementById(
-                `${parseInt(this.id) + 20}`,
-              ).style.backgroundColor = 'red';
-            }
+          }
+        } else {
+          switch (chosenShip) {
+            case 4:
+              if (fourSquaresVertical(row, column, userPositions)) {
+                for (var i = 0; i < 4; i++) {
+                  document.getElementById(
+                    `${parseInt(this.id) + i * 10}`
+                  ).style.backgroundColor = 'green';
+                }
+              } else {
+                for (var i = 0; i < 4; i++) {
+                  document.getElementById(
+                    `${parseInt(this.id) + i * 10}`
+                  ).style.backgroundColor = 'red';
+                }
+              }
+              break;
+            case 3:
+              if (threeSquaresVertical(row, column, userPositions)) {
+                for (var i = 0; i < 3; i++) {
+                  document.getElementById(
+                    `${parseInt(this.id) + i * 10}`
+                  ).style.backgroundColor = 'green';
+                }
+              } else {
+                for (var i = 0; i < 3; i++) {
+                  document.getElementById(
+                    `${parseInt(this.id) + i * 10}`
+                  ).style.backgroundColor = 'red';
+                }
+              }
+              break;
+            case 2:
+              if (twoSquaresVertical(row, column, userPositions)) {
+                document.getElementById(
+                  `${parseInt(this.id)}`
+                ).style.backgroundColor = 'green';
+                document.getElementById(
+                  `${parseInt(this.id) + 10}`
+                ).style.backgroundColor = 'green';
+              } else {
+                document.getElementById(
+                  `${parseInt(this.id)}`
+                ).style.backgroundColor = 'red';
+                document.getElementById(
+                  `${parseInt(this.id) + 10}`
+                ).style.backgroundColor = 'red';
+              }
 
-            break;
-          case 2:
-            if (twoSquaresVertical(row, column, userPositions)) {
-              document.getElementById(
-                `${parseInt(this.id)}`,
-              ).style.backgroundColor = 'green';
-              document.getElementById(
-                `${parseInt(this.id) + 10}`,
-              ).style.backgroundColor = 'green';
-            } else {
-              document.getElementById(
-                `${parseInt(this.id)}`,
-              ).style.backgroundColor = 'red';
-              document.getElementById(
-                `${parseInt(this.id) + 10}`,
-              ).style.backgroundColor = 'red';
-            }
-
-            break;
-          case 1:
-            if (oneSquareVertical(row, column, userPositions)) {
-              document.getElementById(
-                `${parseInt(this.id)}`,
-              ).style.backgroundColor = 'green';
-            } else {
-              document.getElementById(
-                `${parseInt(this.id)}`,
-              ).style.backgroundColor = 'red';
-            }
-            break;
+              break;
+            case 1:
+              if (oneSquareVertical(row, column, userPositions)) {
+                document.getElementById(
+                  `${parseInt(this.id)}`
+                ).style.backgroundColor = 'green';
+              } else {
+                document.getElementById(
+                  `${parseInt(this.id)}`
+                ).style.backgroundColor = 'red';
+              }
+              break;
+          }
         }
       }
     };
     square.onclick = function () {
+      let hoveredSquare = document.getElementById(`${this.id}`);
       if (chosenShip != undefined && this.style.backgroundColor != 'red') {
         if (userDirection === 'horizontal') {
-          switch (chosenShip) {
-            case 4:
+          if (horizontalBruh) {
+            if (parseInt(hoveredSquare.id) % 10 == 8 && chosenShip === 4) {
               document.getElementById(
-                `${parseInt(this.id)}`,
+                `${parseInt(this.id) - 1}`
               ).style.backgroundColor = 'black';
               document.getElementById(
-                `${parseInt(this.id) + 1}`,
+                `${parseInt(this.id)}`
               ).style.backgroundColor = 'black';
               document.getElementById(
-                `${parseInt(this.id) + 2}`,
+                `${parseInt(this.id) + 1}`
               ).style.backgroundColor = 'black';
               document.getElementById(
-                `${parseInt(this.id) + 3}`,
+                `${parseInt(this.id) + 2}`
               ).style.backgroundColor = 'black';
+              document
+                .getElementById(`${parseInt(this.id) - 1}`)
+                .classList.add('occupied');
               document
                 .getElementById(`${parseInt(this.id)}`)
                 .classList.add('occupied');
@@ -675,78 +1255,247 @@ const setUserBoard = function () {
               document
                 .getElementById(`${parseInt(this.id) + 2}`)
                 .classList.add('occupied');
-              document
-                .getElementById(`${parseInt(this.id) + 3}`)
-                .classList.add('occupied');
+              userPositions[row][column - 1] = 1;
               userPositions[row][column] = 1;
               userPositions[row][column + 1] = 1;
               userPositions[row][column + 2] = 1;
-              userPositions[row][column + 3] = 1;
-              break;
-            case 3:
+            } else if (
+              parseInt(hoveredSquare.id) % 10 == 9 &&
+              chosenShip === 4
+            ) {
               document.getElementById(
-                `${parseInt(this.id)}`,
+                `${parseInt(this.id) - 2}`
               ).style.backgroundColor = 'black';
               document.getElementById(
-                `${parseInt(this.id) + 1}`,
+                `${parseInt(this.id) - 1}`
               ).style.backgroundColor = 'black';
               document.getElementById(
-                `${parseInt(this.id) + 2}`,
+                `${parseInt(this.id)}`
               ).style.backgroundColor = 'black';
+              document.getElementById(
+                `${parseInt(this.id) + 1}`
+              ).style.backgroundColor = 'black';
+              document
+                .getElementById(`${parseInt(this.id) - 2}`)
+                .classList.add('occupied');
+              document
+                .getElementById(`${parseInt(this.id) - 1}`)
+                .classList.add('occupied');
               document
                 .getElementById(`${parseInt(this.id)}`)
                 .classList.add('occupied');
               document
                 .getElementById(`${parseInt(this.id) + 1}`)
                 .classList.add('occupied');
-              document
-                .getElementById(`${parseInt(this.id) + 2}`)
-                .classList.add('occupied');
+              userPositions[row][column - 2] = 1;
+              userPositions[row][column - 1] = 1;
               userPositions[row][column] = 1;
               userPositions[row][column + 1] = 1;
-              userPositions[row][column + 2] = 1;
-              break;
-            case 2:
+            } else if (
+              parseInt(hoveredSquare.id) % 10 == 9 &&
+              chosenShip === 3
+            ) {
               document.getElementById(
-                `${parseInt(this.id)}`,
+                `${parseInt(this.id) - 1}`
               ).style.backgroundColor = 'black';
               document.getElementById(
-                `${parseInt(this.id) + 1}`,
+                `${parseInt(this.id)}`
               ).style.backgroundColor = 'black';
+              document.getElementById(
+                `${parseInt(this.id) + 1}`
+              ).style.backgroundColor = 'black';
+              document
+                .getElementById(`${parseInt(this.id) - 1}`)
+                .classList.add('occupied');
               document
                 .getElementById(`${parseInt(this.id)}`)
                 .classList.add('occupied');
               document
                 .getElementById(`${parseInt(this.id) + 1}`)
                 .classList.add('occupied');
+              userPositions[row][column - 1] = 1;
               userPositions[row][column] = 1;
               userPositions[row][column + 1] = 1;
-              break;
-            case 1:
+            } else if (
+              parseInt(hoveredSquare.id) % 10 == 0 &&
+              chosenShip === 4
+            ) {
               document.getElementById(
-                `${parseInt(this.id)}`,
+                `${parseInt(this.id) - 3}`
               ).style.backgroundColor = 'black';
+              document.getElementById(
+                `${parseInt(this.id) - 2}`
+              ).style.backgroundColor = 'black';
+              document.getElementById(
+                `${parseInt(this.id) - 1}`
+              ).style.backgroundColor = 'black';
+              document.getElementById(
+                `${parseInt(this.id)}`
+              ).style.backgroundColor = 'black';
+              document
+                .getElementById(`${parseInt(this.id) - 3}`)
+                .classList.add('occupied');
+              document
+                .getElementById(`${parseInt(this.id) - 2}`)
+                .classList.add('occupied');
+              document
+                .getElementById(`${parseInt(this.id) - 1}`)
+                .classList.add('occupied');
               document
                 .getElementById(`${parseInt(this.id)}`)
                 .classList.add('occupied');
+              userPositions[row][column - 3] = 1;
+              userPositions[row][column - 2] = 1;
+              userPositions[row][column - 1] = 1;
               userPositions[row][column] = 1;
-              break;
+            } else if (
+              parseInt(hoveredSquare.id) % 10 == 0 &&
+              chosenShip === 3
+            ) {
+              document.getElementById(
+                `${parseInt(this.id) - 2}`
+              ).style.backgroundColor = 'black';
+              document.getElementById(
+                `${parseInt(this.id) - 1}`
+              ).style.backgroundColor = 'black';
+              document.getElementById(
+                `${parseInt(this.id)}`
+              ).style.backgroundColor = 'black';
+              document
+                .getElementById(`${parseInt(this.id) - 2}`)
+                .classList.add('occupied');
+              document
+                .getElementById(`${parseInt(this.id) - 1}`)
+                .classList.add('occupied');
+              document
+                .getElementById(`${parseInt(this.id)}`)
+                .classList.add('occupied');
+              userPositions[row][column - 2] = 1;
+              userPositions[row][column - 1] = 1;
+              userPositions[row][column] = 1;
+            } else if (
+              parseInt(hoveredSquare.id) % 10 == 0 &&
+              chosenShip === 2
+            ) {
+              document.getElementById(
+                `${parseInt(this.id) - 1}`
+              ).style.backgroundColor = 'black';
+              document.getElementById(
+                `${parseInt(this.id)}`
+              ).style.backgroundColor = 'black';
+              document
+                .getElementById(`${parseInt(this.id) - 1}`)
+                .classList.add('occupied');
+              document
+                .getElementById(`${parseInt(this.id)}`)
+                .classList.add('occupied');
+              userPositions[row][column - 1] = 1;
+              userPositions[row][column] = 1;
+            }
+          } else {
+            switch (chosenShip) {
+              case 4:
+                document.getElementById(
+                  `${parseInt(this.id)}`
+                ).style.backgroundColor = 'black';
+                document.getElementById(
+                  `${parseInt(this.id) + 1}`
+                ).style.backgroundColor = 'black';
+                document.getElementById(
+                  `${parseInt(this.id) + 2}`
+                ).style.backgroundColor = 'black';
+                document.getElementById(
+                  `${parseInt(this.id) + 3}`
+                ).style.backgroundColor = 'black';
+                document
+                  .getElementById(`${parseInt(this.id)}`)
+                  .classList.add('occupied');
+                document
+                  .getElementById(`${parseInt(this.id) + 1}`)
+                  .classList.add('occupied');
+                document
+                  .getElementById(`${parseInt(this.id) + 2}`)
+                  .classList.add('occupied');
+                document
+                  .getElementById(`${parseInt(this.id) + 3}`)
+                  .classList.add('occupied');
+                userPositions[row][column] = 1;
+                userPositions[row][column + 1] = 1;
+                userPositions[row][column + 2] = 1;
+                userPositions[row][column + 3] = 1;
+                break;
+              case 3:
+                document.getElementById(
+                  `${parseInt(this.id)}`
+                ).style.backgroundColor = 'black';
+                document.getElementById(
+                  `${parseInt(this.id) + 1}`
+                ).style.backgroundColor = 'black';
+                document.getElementById(
+                  `${parseInt(this.id) + 2}`
+                ).style.backgroundColor = 'black';
+                document
+                  .getElementById(`${parseInt(this.id)}`)
+                  .classList.add('occupied');
+                document
+                  .getElementById(`${parseInt(this.id) + 1}`)
+                  .classList.add('occupied');
+                document
+                  .getElementById(`${parseInt(this.id) + 2}`)
+                  .classList.add('occupied');
+                userPositions[row][column] = 1;
+                userPositions[row][column + 1] = 1;
+                userPositions[row][column + 2] = 1;
+                break;
+              case 2:
+                document.getElementById(
+                  `${parseInt(this.id)}`
+                ).style.backgroundColor = 'black';
+                document.getElementById(
+                  `${parseInt(this.id) + 1}`
+                ).style.backgroundColor = 'black';
+                document
+                  .getElementById(`${parseInt(this.id)}`)
+                  .classList.add('occupied');
+                document
+                  .getElementById(`${parseInt(this.id) + 1}`)
+                  .classList.add('occupied');
+                userPositions[row][column] = 1;
+                userPositions[row][column + 1] = 1;
+                break;
+              case 1:
+                document.getElementById(
+                  `${parseInt(this.id)}`
+                ).style.backgroundColor = 'black';
+                document
+                  .getElementById(`${parseInt(this.id)}`)
+                  .classList.add('occupied');
+                userPositions[row][column] = 1;
+                break;
+            }
           }
         } else if (userDirection === 'vertical') {
-          switch (chosenShip) {
-            case 4:
+          if (verticalBruh) {
+            if (
+              (hoveredSquare.id.substr(0, 1) === '7' ||
+                parseInt(hoveredSquare.id) === 80) &&
+              chosenShip === 4
+            ) {
               document.getElementById(
-                `${parseInt(this.id)}`,
+                `${parseInt(this.id) - 10}`
               ).style.backgroundColor = 'black';
               document.getElementById(
-                `${parseInt(this.id) + 10}`,
+                `${parseInt(this.id)}`
               ).style.backgroundColor = 'black';
               document.getElementById(
-                `${parseInt(this.id) + 20}`,
+                `${parseInt(this.id) + 10}`
               ).style.backgroundColor = 'black';
               document.getElementById(
-                `${parseInt(this.id) + 30}`,
+                `${parseInt(this.id) + 20}`
               ).style.backgroundColor = 'black';
+              document
+                .getElementById(`${parseInt(this.id) - 10}`)
+                .classList.add('occupied');
               document
                 .getElementById(`${parseInt(this.id)}`)
                 .classList.add('occupied');
@@ -756,62 +1505,229 @@ const setUserBoard = function () {
               document
                 .getElementById(`${parseInt(this.id) + 20}`)
                 .classList.add('occupied');
-              document
-                .getElementById(`${parseInt(this.id) + 30}`)
-                .classList.add('occupied');
+              userPositions[row - 1][column] = 1;
               userPositions[row][column] = 1;
               userPositions[row + 1][column] = 1;
               userPositions[row + 2][column] = 1;
-              userPositions[row + 3][column] = 1;
-              break;
-            case 3:
+            } else if (
+              (hoveredSquare.id.substr(0, 1) === '8' ||
+                parseInt(hoveredSquare.id) === 90) &&
+              chosenShip === 4
+            ) {
               document.getElementById(
-                `${parseInt(this.id)}`,
+                `${parseInt(this.id) - 20}`
               ).style.backgroundColor = 'black';
               document.getElementById(
-                `${parseInt(this.id) + 10}`,
+                `${parseInt(this.id) - 10}`
               ).style.backgroundColor = 'black';
               document.getElementById(
-                `${parseInt(this.id) + 20}`,
+                `${parseInt(this.id)}`
               ).style.backgroundColor = 'black';
+              document.getElementById(
+                `${parseInt(this.id) + 10}`
+              ).style.backgroundColor = 'black';
+              document
+                .getElementById(`${parseInt(this.id) - 20}`)
+                .classList.add('occupied');
+              document
+                .getElementById(`${parseInt(this.id) - 10}`)
+                .classList.add('occupied');
               document
                 .getElementById(`${parseInt(this.id)}`)
                 .classList.add('occupied');
               document
                 .getElementById(`${parseInt(this.id) + 10}`)
                 .classList.add('occupied');
-              document
-                .getElementById(`${parseInt(this.id) + 20}`)
-                .classList.add('occupied');
+              userPositions[row - 2][column] = 1;
+              userPositions[row - 1][column] = 1;
               userPositions[row][column] = 1;
               userPositions[row + 1][column] = 1;
-              userPositions[row + 2][column] = 1;
-              break;
-            case 2:
+            } else if (
+              (hoveredSquare.id.substr(0, 1) === '8' ||
+                parseInt(hoveredSquare.id) === 90) &&
+              chosenShip === 3
+            ) {
               document.getElementById(
-                `${parseInt(this.id)}`,
+                `${parseInt(this.id) - 10}`
               ).style.backgroundColor = 'black';
               document.getElementById(
-                `${parseInt(this.id) + 10}`,
+                `${parseInt(this.id)}`
               ).style.backgroundColor = 'black';
+              document.getElementById(
+                `${parseInt(this.id) + 10}`
+              ).style.backgroundColor = 'black';
+              document
+                .getElementById(`${parseInt(this.id) - 10}`)
+                .classList.add('occupied');
               document
                 .getElementById(`${parseInt(this.id)}`)
                 .classList.add('occupied');
               document
                 .getElementById(`${parseInt(this.id) + 10}`)
                 .classList.add('occupied');
+              userPositions[row - 1][column] = 1;
               userPositions[row][column] = 1;
               userPositions[row + 1][column] = 1;
-              break;
-            case 1:
+            } else if (
+              (hoveredSquare.id.substr(0, 1) === '9' ||
+                parseInt(hoveredSquare.id) === 100) &&
+              chosenShip === 4
+            ) {
               document.getElementById(
-                `${parseInt(this.id)}`,
+                `${parseInt(this.id) - 30}`
               ).style.backgroundColor = 'black';
+              document.getElementById(
+                `${parseInt(this.id) - 20}`
+              ).style.backgroundColor = 'black';
+              document.getElementById(
+                `${parseInt(this.id) - 10}`
+              ).style.backgroundColor = 'black';
+              document.getElementById(
+                `${parseInt(this.id)}`
+              ).style.backgroundColor = 'black';
+              document
+                .getElementById(`${parseInt(this.id) - 30}`)
+                .classList.add('occupied');
+              document
+                .getElementById(`${parseInt(this.id) - 20}`)
+                .classList.add('occupied');
+              document
+                .getElementById(`${parseInt(this.id) - 10}`)
+                .classList.add('occupied');
               document
                 .getElementById(`${parseInt(this.id)}`)
                 .classList.add('occupied');
+              userPositions[row - 3][column] = 1;
+              userPositions[row - 2][column] = 1;
+              userPositions[row - 1][column] = 1;
               userPositions[row][column] = 1;
-              break;
+            } else if (
+              (hoveredSquare.id.substr(0, 1) === '9' ||
+                parseInt(hoveredSquare.id) === 100) &&
+              chosenShip === 3
+            ) {
+              document.getElementById(
+                `${parseInt(this.id) - 20}`
+              ).style.backgroundColor = 'black';
+              document.getElementById(
+                `${parseInt(this.id) - 10}`
+              ).style.backgroundColor = 'black';
+              document.getElementById(
+                `${parseInt(this.id)}`
+              ).style.backgroundColor = 'black';
+              document
+                .getElementById(`${parseInt(this.id) - 20}`)
+                .classList.add('occupied');
+              document
+                .getElementById(`${parseInt(this.id) - 10}`)
+                .classList.add('occupied');
+              document
+                .getElementById(`${parseInt(this.id)}`)
+                .classList.add('occupied');
+              userPositions[row - 2][column] = 1;
+              userPositions[row - 1][column] = 1;
+              userPositions[row][column] = 1;
+            } else if (
+              (hoveredSquare.id.substr(0, 1) === '9' ||
+                parseInt(hoveredSquare.id) === 100) &&
+              chosenShip === 2
+            ) {
+              document.getElementById(
+                `${parseInt(this.id) - 10}`
+              ).style.backgroundColor = 'black';
+              document.getElementById(
+                `${parseInt(this.id)}`
+              ).style.backgroundColor = 'black';
+              document
+                .getElementById(`${parseInt(this.id) - 10}`)
+                .classList.add('occupied');
+              document
+                .getElementById(`${parseInt(this.id)}`)
+                .classList.add('occupied');
+              userPositions[row - 1][column] = 1;
+              userPositions[row][column] = 1;
+            }
+          } else {
+            switch (chosenShip) {
+              case 4:
+                document.getElementById(
+                  `${parseInt(this.id)}`
+                ).style.backgroundColor = 'black';
+                document.getElementById(
+                  `${parseInt(this.id) + 10}`
+                ).style.backgroundColor = 'black';
+                document.getElementById(
+                  `${parseInt(this.id) + 20}`
+                ).style.backgroundColor = 'black';
+                document.getElementById(
+                  `${parseInt(this.id) + 30}`
+                ).style.backgroundColor = 'black';
+                document
+                  .getElementById(`${parseInt(this.id)}`)
+                  .classList.add('occupied');
+                document
+                  .getElementById(`${parseInt(this.id) + 10}`)
+                  .classList.add('occupied');
+                document
+                  .getElementById(`${parseInt(this.id) + 20}`)
+                  .classList.add('occupied');
+                document
+                  .getElementById(`${parseInt(this.id) + 30}`)
+                  .classList.add('occupied');
+                userPositions[row][column] = 1;
+                userPositions[row + 1][column] = 1;
+                userPositions[row + 2][column] = 1;
+                userPositions[row + 3][column] = 1;
+                break;
+              case 3:
+                document.getElementById(
+                  `${parseInt(this.id)}`
+                ).style.backgroundColor = 'black';
+                document.getElementById(
+                  `${parseInt(this.id) + 10}`
+                ).style.backgroundColor = 'black';
+                document.getElementById(
+                  `${parseInt(this.id) + 20}`
+                ).style.backgroundColor = 'black';
+                document
+                  .getElementById(`${parseInt(this.id)}`)
+                  .classList.add('occupied');
+                document
+                  .getElementById(`${parseInt(this.id) + 10}`)
+                  .classList.add('occupied');
+                document
+                  .getElementById(`${parseInt(this.id) + 20}`)
+                  .classList.add('occupied');
+                userPositions[row][column] = 1;
+                userPositions[row + 1][column] = 1;
+                userPositions[row + 2][column] = 1;
+                break;
+              case 2:
+                document.getElementById(
+                  `${parseInt(this.id)}`
+                ).style.backgroundColor = 'black';
+                document.getElementById(
+                  `${parseInt(this.id) + 10}`
+                ).style.backgroundColor = 'black';
+                document
+                  .getElementById(`${parseInt(this.id)}`)
+                  .classList.add('occupied');
+                document
+                  .getElementById(`${parseInt(this.id) + 10}`)
+                  .classList.add('occupied');
+                userPositions[row][column] = 1;
+                userPositions[row + 1][column] = 1;
+                break;
+              case 1:
+                document.getElementById(
+                  `${parseInt(this.id)}`
+                ).style.backgroundColor = 'black';
+                document
+                  .getElementById(`${parseInt(this.id)}`)
+                  .classList.add('occupied');
+                userPositions[row][column] = 1;
+                break;
+            }
           }
         }
         let el = document.getElementsByClassName(chosenShip2);
@@ -845,7 +1761,7 @@ const setUserBoard = function () {
     };
     userBoard.appendChild(square);
   }
-};
+}; //TODO popraw context menu na skrajach
 setUserBoard();
 
 //losowanie i zwracanie wylosowanego kierunku jeśli można postawić na wylosowanej pozycji statek
@@ -923,13 +1839,13 @@ function computerShot() {
         document
           .getElementById(`${randomPosition}`)
           .className.substr(
-            document.getElementById(`${randomPosition}`).className.length - 4,
+            document.getElementById(`${randomPosition}`).className.length - 4
           )
           .trim() == 'miss' ||
         document
           .getElementById(`${randomPosition}`)
           .className.substr(
-            document.getElementById(`${randomPosition}`).className.length - 4,
+            document.getElementById(`${randomPosition}`).className.length - 4
           )
           .trim() == 'hit'
       ) {
@@ -1002,7 +1918,7 @@ function computerWin() {
             el[0].style.backgroundColor = 'black';
           } else {
             let el = document.getElementsByClassName(
-              `${higherIndex - 1}${lowerIndex}`,
+              `${higherIndex - 1}${lowerIndex}`
             );
             el[0].style.backgroundColor = 'black';
           }
@@ -1070,17 +1986,21 @@ function clearEverything() {
   isGameOver = false;
   userLastShot = 'miss';
   compLastShot = 'miss';
+  //usunięcie przycisku nowa graq
   for (var i = 0; i < 4; i++) {
     document.body.removeChild(document.body.lastChild);
   }
+  //wyczyszczenie plansz
   userBoard.innerHTML = '';
   shipsBoard.innerHTML = '';
   compBoard.innerHTML = '';
   userBoard.style.cursor = 'arrow';
+  //rozstawienie plansz użytownika i komputera
   setCompShips();
   setCompBoard();
   giveShipsToUser();
   setUserBoard();
+  //dodanie plansz na stronę
   document.body.style.width = '1000px';
   document.body.appendChild(shipsBoard);
   document.body.appendChild(userBoard);
